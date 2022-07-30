@@ -85,6 +85,7 @@ a:hover {
     padding: 0px;
     margin-top: 32px;
     margin-bottom: 0px;
+    margin-right: 32px;
 }
 
 .cstatus {
@@ -113,6 +114,7 @@ a:hover {
     margin-top: 16px;
     margin-bottom: 0px;
     margin-left: 32px;
+    margin-right: 32px;
 }
 
 .aboute {
@@ -122,6 +124,7 @@ a:hover {
     padding: 0px;
     margin-top: 8px;
     margin-left: 32px;
+    margin-right: 32px;
 }
 
 .mini {
@@ -207,4 +210,10 @@ progress {
     right: 0px;
     margin-bottom: 0px;
     position: absolute;
+}
+
+@media screen and (max-width: 949px) {
+    .card {
+        width: 100%;
+    }
 }
