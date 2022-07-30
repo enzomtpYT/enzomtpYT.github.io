@@ -9,6 +9,7 @@ let progress = document.getElementById("progress");
 let songtime = document.getElementById("songtime");
 let songtime2 = document.getElementById("songtime2");
 let spoli = document.getElementById("spoli");
+let progressbarfill = document.getElementById("progressbarfill");
 let userid = "221273966457782283"
 let upprog = null
 datasend = {
@@ -17,6 +18,15 @@ datasend = {
       subscribe_to_id: userid
     }
   }
+
+function formatnum(word) {
+    word = word.toString();
+    if (word.length == 1) {
+        return "0"+word;
+    } else {
+        return word;
+    }
+}
 
 function update(datas) {
     let username = datas.d.discord_user.username;
@@ -65,12 +75,15 @@ function update(datas) {
         albumart.src = datas.d.spotify.album_art_url;
         songtitle.innerHTML = datas.d.spotify.song;
         songartist.innerHTML = datas.d.spotify.artist;
-        progress.max = datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start;
-        songtime2.innerHTML = parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000/60)+"m"+parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000%60)+"s";
+        songtime2.innerHTML = parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000/60)+"m"+formatnum(parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000%60))+"s";
         upprog = setInterval(() => {
-            progress.value = Date.now() - datas.d.spotify.timestamps.start;
-            songtime.innerHTML = parseInt((Date.now() - datas.d.spotify.timestamps.start)/1000/60)+"m"+parseInt((Date.now() - datas.d.spotify.timestamps.start)/1000%60)+"s";
-        }, 10);
+            now = new Date().getTime();
+            duration = datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start;
+            wherenow = now - datas.d.spotify.timestamps.start;
+            prcnt = (wherenow/duration) * 100;
+            songtime.innerHTML = parseInt((Date.now() - datas.d.spotify.timestamps.start)/1000/60)+"m"+formatnum(parseInt((Date.now() - datas.d.spotify.timestamps.start)/1000%60))+"s";
+            progressbarfill.style.width = prcnt+"%";
+        }, 100);
     } else {
         albumart.hidden = true;
         songartist.hidden = true;
