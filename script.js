@@ -70,7 +70,6 @@ let lanyard = new WebSocket("wss://api.lanyard.rest/socket");
 
 lanyard.onmessage = function(event) {
     jsonData = JSON.parse(event.data);
-    console.log(jsonData);
     if (jsonData.op == 1) {
         lanyard.send(JSON.stringify(datasend));
         ITer = setInterval(() => {
