@@ -1,15 +1,15 @@
-title = document.getElementById("title")
-pdpimg = document.getElementById("pdpimga");
-usernameel = document.getElementById("username");
-cstatus = document.getElementById("cstatus");
-albumart = document.getElementById("albumart");
-songtitle = document.getElementById("songtitle");
-songartist = document.getElementById("songartist");
-progress = document.getElementById("progress");
-songtime = document.getElementById("songtime");
-songtime2 = document.getElementById("songtime2");
-userid = "221273966457782283"
-upprog = null
+let title = document.getElementById("title")
+let pdpimg = document.getElementById("pdpimga");
+let usernameel = document.getElementById("username");
+let cstatus = document.getElementById("cstatus");
+let albumart = document.getElementById("albumart");
+let songtitle = document.getElementById("songtitle");
+let songartist = document.getElementById("songartist");
+let progress = document.getElementById("progress");
+let songtime = document.getElementById("songtime");
+let songtime2 = document.getElementById("songtime2");
+let userid = "221273966457782283"
+let upprog = null
 datasend = {
     op: 2,
     d: {
@@ -18,7 +18,7 @@ datasend = {
   }
 
 function update(datas) {
-    username = datas.d.discord_user.username;
+    let username = datas.d.discord_user.username;
     title.innerHTML = username;
     usernameel.innerHTML = username+"#"+datas.d.discord_user.discriminator;
     pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
@@ -33,12 +33,13 @@ function update(datas) {
     }
 
     cstatus.innerHTML = datas.d.activities["0"].state;
-    cstatusd = datas.d.activities["0"].state;
+    let cstatusd = datas.d.activities["0"].state;
     if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
         cstatus.innerHTML = "<a href='"+datas.d.activities["0"].state+"'>"+datas.d.activities["0"].state+"</a>";
     }
 
     if (datas.d.spotify) {
+        clearInterval(upprog);
         albumart.hidden = false;
         songartist.hidden = false;
         progress.hidden = false;

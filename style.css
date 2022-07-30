@@ -30,7 +30,6 @@ a:hover {
     display: flex;
     flex-direction: row;
     width: 50%;
-    height: 200px;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     background-color: rgba(58, 48, 68, 0.5);
@@ -39,7 +38,7 @@ a:hover {
     margin: 10px 0px 10px 0px;
 }
 
-.body {
+.container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -143,7 +142,6 @@ a:hover {
     flex-direction: row;
     position: relative;
     width: 100%;
-    height: 100%;
     margin: 36px;
 }
 
@@ -174,6 +172,9 @@ a:hover {
 
 progress {
     width: 100%;
+}
+
+.progressbar {
     margin-top: 8px;
     margin-left: 8px;
 }
