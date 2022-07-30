@@ -8,6 +8,7 @@ let songartist = document.getElementById("songartist");
 let progress = document.getElementById("progress");
 let songtime = document.getElementById("songtime");
 let songtime2 = document.getElementById("songtime2");
+let spoli = document.getElementById("spoli");
 let userid = "221273966457782283"
 let upprog = null
 datasend = {
@@ -56,6 +57,7 @@ function update(datas) {
         progress.hidden = false;
         songtime.hidden = false;
         songtime2.hidden = false;
+        spoli.href = "http://spotify:track:"+datas.d.spotify.track_id;
         albumart.src = datas.d.spotify.album_art_url;
         songtitle.innerHTML = datas.d.spotify.song;
         songartist.innerHTML = datas.d.spotify.artist;
@@ -71,6 +73,7 @@ function update(datas) {
         progress.hidden = true;
         songtime.hidden = true;
         songtime2.hidden = true;
+        spoli.href = "";
         if (upprog !== null) {
             clearInterval(upprog);
         }
