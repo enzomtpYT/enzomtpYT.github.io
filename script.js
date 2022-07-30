@@ -31,7 +31,7 @@ function update(datas) {
     } else if (datas.d.discord_status == "idle") {
         document.getElementById("status").style.backgroundColor = "#ffff00";
     } else if (datas.d.discord_status == "offline") {
-        document.getElementById("status").style.backgroundColor = "#ff0000";
+        document.getElementById("status").style.backgroundColor = "#747f8d";
     }
 
     if (datas.d.activities.length == 0) {
@@ -74,7 +74,7 @@ function update(datas) {
         if (upprog !== null) {
             clearInterval(upprog);
         }
-        songtitle.innerHTML = "I actually don't listen to anything.";
+        songtitle.innerHTML = "I don't listen to anything now";
     }
 }
 
