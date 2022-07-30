@@ -34,9 +34,14 @@ function update(datas) {
         document.getElementById("status").style.backgroundColor = "#ff0000";
     }
 
-    if (datas.d.activities.length == 0 || datas.d.activities["0"].state == datas.d.spotify.artist) {
+    if (datas.d.activities.length == 0) {
         cstatus.innerHTML = ""
     } else {
+        if (datas.d.spotify) {
+            if (datas.d.activities["0"].state == datas.d.spotify.artist) {
+                cstatus.innerHTML = ""
+            }
+        }
         let cstatusd = datas.d.activities["0"].state;
         cstatus.innerHTML = cstatusd
         if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
