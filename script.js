@@ -21,7 +21,9 @@ function update(datas) {
     let username = datas.d.discord_user.username;
     title.innerHTML = username;
     usernameel.innerHTML = username+"#"+datas.d.discord_user.discriminator;
-    pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
+    if ( pdpimg.src !== "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar) {
+        pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
+    }
     if (datas.d.discord_status == "dnd") {
         document.getElementById("status").style.backgroundColor = "#c63e40";
     } else if (datas.d.discord_status == "online") {
