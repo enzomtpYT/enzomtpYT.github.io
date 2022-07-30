@@ -27,12 +27,16 @@ function update(datas) {
     }
     if (datas.d.discord_status == "dnd") {
         document.getElementById("status").style.backgroundColor = "#c63e40";
+        document.getElementById("status").title = "Discord Status : Do Not Disturb";
     } else if (datas.d.discord_status == "online") {
         document.getElementById("status").style.backgroundColor = "#00ff00";
+        document.getElementById("status").title = "Discord Status : Online";
     } else if (datas.d.discord_status == "idle") {
         document.getElementById("status").style.backgroundColor = "#ffff00";
+        document.getElementById("status").title = "Discord Status : Idle";
     } else if (datas.d.discord_status == "offline") {
         document.getElementById("status").style.backgroundColor = "#747f8d";
+        document.getElementById("status").title = "Discord Status : Offline";
     }
 
     if (datas.d.activities.length == 0) {
