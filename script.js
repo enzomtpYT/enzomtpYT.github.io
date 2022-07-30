@@ -34,10 +34,14 @@ function update(datas) {
         document.getElementById("status").style.backgroundColor = "#ff0000";
     }
 
-    cstatus.innerHTML = datas.d.activities["0"].state;
-    let cstatusd = datas.d.activities["0"].state;
-    if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
-        cstatus.innerHTML = "<a href='"+datas.d.activities["0"].state+"'>"+datas.d.activities["0"].state+"</a>";
+    if (datas.d.activities.length == 0 || datas.d.activities["0"].state == datas.d.spotify.artist) {
+        cstatus.innerHTML = ""
+    } else {
+        let cstatusd = datas.d.activities["0"].state;
+        cstatus.innerHTML = cstatusd
+        if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
+            cstatus.innerHTML = "<a href='"+datas.d.activities["0"].state+"'>"+datas.d.activities["0"].state+"</a>";
+        }
     }
 
     if (datas.d.spotify) {
