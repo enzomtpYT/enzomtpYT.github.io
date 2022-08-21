@@ -71,7 +71,7 @@ function update(datas) {
         progress.hidden = false;
         songtime.hidden = false;
         songtime2.hidden = false;
-        spoli.href = "http://spotify:track:"+datas.d.spotify.track_id;
+        spoli.href = "https://open.spotify.com/track/"+datas.d.spotify.track_id;
         albumart.src = datas.d.spotify.album_art_url;
         songtitle.innerHTML = datas.d.spotify.song;
         songartist.innerHTML = datas.d.spotify.artist;
