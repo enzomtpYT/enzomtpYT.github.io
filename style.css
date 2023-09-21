@@ -16,7 +16,7 @@ a:hover {
 
 .bg {
     position: fixed;
-    background-image: url("../Assets/bg.png");
+    background-image: url("./Assets/bg.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -318,6 +318,19 @@ a:hover {
         margin-top: 4px;
         margin-left: 4px;
     }
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    margin-top: -8px;
+    margin-left: 24px;
+}
+
+.slink {
+    width:64px;
+    height:64px;
+    margin: 6px;
 }
 
 @media screen and (max-height: 500px) and (max-width: 685px) { 
