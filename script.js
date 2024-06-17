@@ -10,8 +10,12 @@ let songtime = document.getElementById("songtime");
 let songtime2 = document.getElementById("songtime2");
 let spoli = document.getElementById("spoli");
 let progressbarfill = document.getElementById("progressbarfill");
+let loadinganim = document.getElementById("loadinganim");
 let userid = "221273966457782283"
 let upprog = null
+isLanLoaded = false
+isPageLoaded = false
+
 datasend = {
     op: 2,
     d: {
@@ -27,6 +31,20 @@ function formatnum(word) {
         return word;
     }
 }
+
+function disableLoading() {
+    if (isPageLoaded && isLanLoaded) {
+        loadinganim.style.opacity = "0";
+        // wait 1s
+        setTimeout(() => {
+        loadinganim.style.display = "none";
+        }, 1050);
+    }
+}
+
+window.addEventListener("load", function(){ 
+    isPageLoaded = true;
+});
 
 function update(datas) {
     let username = datas.d.discord_user.username;
@@ -95,6 +113,10 @@ function update(datas) {
             clearInterval(upprog);
         }
         songtitle.innerHTML = "I don't listen to anything now";
+    }
+    if (!isLanLoaded) {
+        isLanLoaded = true;
+        disableLoading();
     }
 }
 
