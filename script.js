@@ -44,6 +44,7 @@ function disableLoading() {
 
 window.addEventListener("load", function(){ 
     isPageLoaded = true;
+    disableLoading();
 });
 
 function update(datas) {
