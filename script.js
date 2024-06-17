@@ -32,6 +32,45 @@ function formatnum(word) {
     }
 }
 
+function getAverageBorderColor(imageUrl, borderWidth) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous"; // Allow cross-origin image loading
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+  
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        let totalR = 0, totalG = 0, totalB = 0, count = 0;
+  
+        for (let y = 0; y < canvas.height; y++) {
+          for (let x = 0; x < canvas.width; x++) {
+            const pixelIndex = (y * canvas.width + x) * 4;
+            if (x < borderWidth || x >= canvas.width - borderWidth ||
+                y < borderWidth || y >= canvas.height - borderWidth) {
+              totalR += data[pixelIndex];
+              totalG += data[pixelIndex + 1];
+              totalB += data[pixelIndex + 2];
+              count++;
+            }
+          }
+        }
+  
+        const avgR = Math.round(totalR / count);
+        const avgG = Math.round(totalG / count);
+        const avgB = Math.round(totalB / count);
+  
+        resolve(`rgb(${avgR}, ${avgG}, ${avgB})`);
+      };
+      img.onerror = reject;
+      img.src = imageUrl;
+    });
+  }
+
 function disableLoading() {
     if (isPageLoaded && isLanLoaded) {
         loadinganim.style.opacity = "0";
@@ -92,6 +131,9 @@ function update(datas) {
         songtime2.hidden = false;
         spoli.href = "https://open.spotify.com/track/"+datas.d.spotify.track_id;
         albumart.src = datas.d.spotify.album_art_url;
+        getAverageBorderColor(datas.d.spotify.album_art_url, 0.1).then((averageColor) => {
+            albumart.style.boxShadow = "0 0 10px 10px "+averageColor
+            console.log(averageColor)});
         songtitle.innerHTML = datas.d.spotify.song;
         songartist.innerHTML = datas.d.spotify.artist;
         songtime2.innerHTML = parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000/60)+"m"+formatnum(parseInt((datas.d.spotify.timestamps.end - datas.d.spotify.timestamps.start)/1000%60))+"s";
