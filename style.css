@@ -221,12 +221,18 @@ a:hover {
     flex-direction: row;
     margin-left: 24px;
     margin-bottom: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .slink {
     width:64px;
     height:64px;
     margin: 6px;
+}
+
+.icard {
+    width: 100%;
 }
 
 @media screen and (max-width: 949px) {
@@ -245,7 +251,7 @@ a:hover {
     }
 
     .card {
-        width: 100%;
+        width: 90%;
     }
 
     .slink {
