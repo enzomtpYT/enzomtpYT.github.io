@@ -14,6 +14,7 @@ let loadinganim = document.getElementById("loadinganim");
 let tag = document.getElementById("tag");
 let tagimg = document.getElementById("tagimg");
 let tagdiv = document.getElementsByClassName("tagdiv")[0];
+let emote = document.getElementById("emote");
 let userid = "221273966457782283"
 let upprog = null
 isLanLoaded = false
@@ -128,6 +129,7 @@ function update(datas) {
             if (!datas.d.activities["0"].emoji.id) {
                 cstatusd = `${datas.d.activities["0"].emoji.name} ${datas.d.activities["0"].state}`;
             } else {
+                emote.src = `https://cdn.discordapp.com/emojis/${datas.d.activities["0"].emoji.id}.${datas.d.activities["0"].emoji.animated ? "gif" : "png"}`;
                 cstatusd = datas.d.activities["0"].state;
             }
             cstatus.innerHTML = cstatusd

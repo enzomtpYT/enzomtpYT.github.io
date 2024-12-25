@@ -134,7 +134,20 @@ a:hover {
     font-weight: 600;
     font-family: 'Helvetica', sans-serif;
     padding: 0px;
+    margin: 0px;
+}
+
+.cstatusdiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-top: 8px;
+}
+
+.emote {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 
 .title {
