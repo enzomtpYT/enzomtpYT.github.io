@@ -1,16 +1,16 @@
 body {
     padding: 0px;
     margin: 0px;
-    color: #fff;
+    color: #000;
 }
 
 a {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     text-decoration: underline;
 }
 
 a:hover {
-    color: rgb(178, 178, 178);
+    color: rgb(100, 100, 100);
     text-decoration: underline;
 }
 
@@ -23,19 +23,19 @@ a:hover {
     height: 100%;
     width: 100%;
     filter: blur(8px);
-    filter: brightness(0.2);
+    filter: brightness(0.8);
     transform: scale(1.1);
 }
 
 .card {
     display: flex;
     flex-direction: row;
-    width: 50%;
+    width: 75%;
     -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
-    background-color: rgba(58, 48, 68, 0.5);
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(145, 70, 255, 0.1);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
     margin: 10px 0px 10px 0px;
 }
 
@@ -64,11 +64,11 @@ a:hover {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    background-color: #fff;
+    background-color: #000;
     bottom: -15px;
     right: 15px;
     transform: translate(50%, -50%);
-    border: 2px solid rgba(59, 59, 59, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .pfpstatus {
@@ -79,28 +79,67 @@ a:hover {
     margin: 36px;
 }
 
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tagdiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 8px;
+    margin-top: 32px;
+    border-radius: 8px;
+    background-color: #323338;
+    align-items: center;
+}
+
+.tagimg {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+}
+
+.tag {
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: 800;
+    font-family: 'Helvetica', sans-serif;
+    padding: 0px;
+    margin: 4px 8px 4px 4px;
+}
+
+.vtuber {
+    width: 15%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
 .username {
-    color: #fff;
-    font-size: 2em; 
-    font-family: 'Roboto', sans-serif;
+    color: #000;
+    font-size: 2.5em; 
+    font-weight: 800;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 32px;
     margin-bottom: 0px;
-    margin-right: 32px;
 }
 
 .cstatus {
-    color: #fff;
+    color: #000;
     font-size: 1.25em;
-    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
 }
 
 .title {
-    color: #fff;
+    color: #000;
     font-size: 2em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 16px;
     margin-left: 32px;
@@ -108,9 +147,9 @@ a:hover {
 }
 
 .about {
-    color: #fff;
+    color: #000;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-bottom: 16px;
@@ -120,9 +159,9 @@ a:hover {
 
 .mini {
     position: absolute;
-    color: #fff;
+    color: #000;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -150,9 +189,9 @@ a:hover {
 }
 
 .songtitle {
-    color: #fff;
+    color: #000;
     font-size: 1.5em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -160,9 +199,9 @@ a:hover {
 }
 
 .songartist {
-    color: #fff;
+    color: #000;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -174,7 +213,7 @@ a:hover {
     width: 100%;
     margin-top: 8px;
     margin-left: 8px;
-    background-color: #fff;
+    background-color: #000;
     border-radius: 8px;
 }
 
@@ -196,9 +235,9 @@ a:hover {
 }
 
 .songtime {
-    color: #fff;
+    color: #000;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -206,9 +245,9 @@ a:hover {
 }
 
 .songtime2 {
-    color: #fff;
+    color: #000;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     right: 0px;
@@ -219,20 +258,29 @@ a:hover {
 .links {
     display: flex;
     flex-direction: row;
-    margin-left: 24px;
-    margin-bottom: 8px;
+    flex-wrap: wrap;
+    padding: 8px 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.linksgroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.col {
+    display: flex;
+    box-sizing: border-box;
+    padding: 8px;
 }
 
 .slink {
     width:64px;
-    height:64px;
-    margin: 6px;
-}
-
-@media screen and (max-width: 949px) {
-    .card {
-        width: 75%;
-    }
+    aspect-ratio: 1;
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 685px) {
