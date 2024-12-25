@@ -30,7 +30,7 @@ a:hover {
 .card {
     display: flex;
     flex-direction: row;
-    width: 50%;
+    width: 75%;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     background-color: rgba(58, 48, 68, 0.5);
@@ -79,10 +79,49 @@ a:hover {
     margin: 36px;
 }
 
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tagdiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 8px;
+    margin-top: 32px;
+    border-radius: 8px;
+    background-color: #323338;
+    align-items: center;
+}
+
+.tagimg {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+}
+
+.tag {
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: 800;
+    font-family: 'Helvetica', sans-serif;
+    padding: 0px;
+    margin: 4px 8px 4px 4px;
+}
+
+.vtuber {
+    width: 15%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
 .username {
     color: #fff;
-    font-size: 2em; 
-    font-family: 'Roboto', sans-serif;
+    font-size: 2.5em; 
+    font-weight: 800;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 32px;
     margin-bottom: 0px;
@@ -92,7 +131,8 @@ a:hover {
 .cstatus {
     color: #fff;
     font-size: 1.25em;
-    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
 }
@@ -100,7 +140,7 @@ a:hover {
 .title {
     color: #fff;
     font-size: 2em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 16px;
     margin-left: 32px;
@@ -110,7 +150,7 @@ a:hover {
 .about {
     color: #fff;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-bottom: 16px;
@@ -122,7 +162,7 @@ a:hover {
     position: absolute;
     color: #fff;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -152,7 +192,7 @@ a:hover {
 .songtitle {
     color: #fff;
     font-size: 1.5em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -162,7 +202,7 @@ a:hover {
 .songartist {
     color: #fff;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -198,7 +238,7 @@ a:hover {
 .songtime {
     color: #fff;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     margin-left: 8px;
@@ -208,7 +248,7 @@ a:hover {
 .songtime2 {
     color: #fff;
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     padding: 0px;
     margin-top: 8px;
     right: 0px;
@@ -219,20 +259,29 @@ a:hover {
 .links {
     display: flex;
     flex-direction: row;
-    margin-left: 24px;
-    margin-bottom: 8px;
+    flex-wrap: wrap;
+    padding: 8px 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.linksgroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.col {
+    display: flex;
+    box-sizing: border-box;
+    padding: 8px;
 }
 
 .slink {
     width:64px;
-    height:64px;
-    margin: 6px;
-}
-
-@media screen and (max-width: 949px) {
-    .card {
-        width: 75%;
-    }
+    aspect-ratio: 1;
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 685px) {

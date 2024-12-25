@@ -11,6 +11,9 @@ let songtime2 = document.getElementById("songtime2");
 let spoli = document.getElementById("spoli");
 let progressbarfill = document.getElementById("progressbarfill");
 let loadinganim = document.getElementById("loadinganim");
+let tag = document.getElementById("tag");
+let tagimg = document.getElementById("tagimg");
+let tagdiv = document.getElementsByClassName("tagdiv")[0];
 let userid = "221273966457782283"
 let upprog = null
 isLanLoaded = false
@@ -90,6 +93,12 @@ function update(datas) {
     let username = datas.d.discord_user.display_name;
     title.innerHTML = username;
     usernameel.innerHTML = username;
+    if (!datas.d.discord_user.clan.tag == "null") {
+        tag.innerHTML = datas.d.discord_user.clan.tag;
+        tagimg.src = `https://cdn.discordapp.com/clan-badges/${datas.d.discord_user.clan.identity_guild_id}/${datas.d.discord_user.clan.badge}.png?size=16`;
+    } else {
+        tagdiv.style.opacity = "0";
+    }
     if ( pdpimg.src !== "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar) {
         pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
     }
@@ -115,10 +124,16 @@ function update(datas) {
                 cstatus.innerHTML = ""
             }
         }
-        let cstatusd = datas.d.activities["0"].state;
-        cstatus.innerHTML = cstatusd
-        if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
-            cstatus.innerHTML = "<a href='"+datas.d.activities["0"].state+"'>"+datas.d.activities["0"].state+"</a>";
+        if (datas.d.activities["0"].id == "custom") {
+            if (!datas.d.activities["0"].emoji.id) {
+                cstatusd = `${datas.d.activities["0"].emoji.name} ${datas.d.activities["0"].state}`;
+            } else {
+                cstatusd = datas.d.activities["0"].state;
+            }
+            cstatus.innerHTML = cstatusd
+            if (cstatusd.startsWith("http") || cstatusd.startsWith("https")) {
+                cstatus.innerHTML = "<a href='"+datas.d.activities["0"].state+"'>"+datas.d.activities["0"].state+"</a>";
+            }
         }
     }
 
