@@ -87,9 +87,9 @@ window.addEventListener("load", function(){
 });
 
 function update(datas) {
-    let username = datas.d.discord_user.username;
+    let username = datas.d.discord_user.display_name;
     title.innerHTML = username;
-    usernameel.innerHTML = username+"#"+datas.d.discord_user.discriminator;
+    usernameel.innerHTML = username;
     if ( pdpimg.src !== "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar) {
         pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
     }
