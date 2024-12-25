@@ -128,7 +128,9 @@ function update(datas) {
         if (datas.d.activities["0"].id == "custom") {
             if (!datas.d.activities["0"].emoji.id) {
                 cstatusd = `${datas.d.activities["0"].emoji.name} ${datas.d.activities["0"].state}`;
+                emote.style.display = "none";
             } else {
+                emote.style.display = "block";
                 emote.src = `https://cdn.discordapp.com/emojis/${datas.d.activities["0"].emoji.id}.${datas.d.activities["0"].emoji.animated ? "gif" : "png"}`;
                 cstatusd = datas.d.activities["0"].state;
             }
