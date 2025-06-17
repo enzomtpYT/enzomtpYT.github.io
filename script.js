@@ -94,9 +94,9 @@ function update(datas) {
     let username = datas.d.discord_user.display_name;
     title.innerHTML = username;
     usernameel.innerHTML = username;
-    if (!datas.d.discord_user.clan.tag == "null") {
-        tag.innerHTML = datas.d.discord_user.clan.tag;
-        tagimg.src = `https://cdn.discordapp.com/clan-badges/${datas.d.discord_user.clan.identity_guild_id}/${datas.d.discord_user.clan.badge}.png?size=16`;
+    if (!datas.d.discord_user.primary_guild.tag == "null") {
+        tag.innerHTML = datas.d.discord_user.primary_guild.tag;
+        tagimg.src = `https://cdn.discordapp.com/clan-badges/${datas.d.discord_user.primary_guild.identity_guild_id}/${datas.d.discord_user.clan.badge}.png?size=16`;
     } else {
         tagdiv.style.opacity = "0";
     }
