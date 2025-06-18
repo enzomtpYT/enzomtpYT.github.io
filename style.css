@@ -96,14 +96,14 @@ a:hover {
 }
 
 .tagimg {
-    width: 16px;
-    height: 16px;
+    width: 28px;
+    height: 28px;
     margin-left: 6px;
 }
 
 .tag {
     color: #ffffff;
-    font-size: 1em;
+    font-size: 1.25em;
     font-weight: 800;
     font-family: 'Helvetica', sans-serif;
     padding: 0px;
@@ -125,7 +125,7 @@ a:hover {
     padding: 0px;
     margin-top: 32px;
     margin-bottom: 0px;
-    margin-right: 32px;
+    margin-right: 0px;
 }
 
 .cstatus {
@@ -145,8 +145,8 @@ a:hover {
 }
 
 .emote {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     margin-right: 8px;
 }
 
