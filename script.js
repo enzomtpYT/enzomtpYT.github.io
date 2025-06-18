@@ -94,10 +94,13 @@ function update(datas) {
     let username = datas.d.discord_user.display_name;
     title.innerHTML = username;
     usernameel.innerHTML = username;
-    if (!datas.d.discord_user.primary_guild.tag == "null") {
+    if (datas.d.discord_user.primary_guild && datas.d.discord_user.primary_guild.tag) {
+        tagdiv.style.display = "flex";
+        tagdiv.style.opacity = "1";
         tag.innerHTML = datas.d.discord_user.primary_guild.tag;
-        tagimg.src = `https://cdn.discordapp.com/clan-badges/${datas.d.discord_user.primary_guild.identity_guild_id}/${datas.d.discord_user.clan.badge}.png?size=16`;
+        tagimg.src = `https://cdn.discordapp.com/clan-badges/${datas.d.discord_user.primary_guild.identity_guild_id}/${datas.d.discord_user.primary_guild.badge}.png?size=16`;
     } else {
+        tagdiv.style.display = "none";
         tagdiv.style.opacity = "0";
     }
     if ( pdpimg.src !== "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar) {
