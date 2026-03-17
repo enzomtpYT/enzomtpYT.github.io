@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="Assets/Favicon.png" />
     <title id="title">Loading...</title>
     <script defer src="script.js"></script>
@@ -28,9 +31,10 @@
     <div class="bg"></div>
         <div class="container">
             <div class="card">
-                <div clas="pdp">
+                <div class="pdp">
                     <div class="pfpstatus">
                         <img title="Profile Pic" id="pdpimga" class="pdpimg" src="Assets/load.gif" alt="Profile Picture">
+                        <img hidden title="Avatar Decoration" id="avatarDecoration" class="avatar-decoration" src="" alt="Avatar Decoration">
                         <div title="Discord Status : " id="status" class="status" alt="status"></div>
                     </div>
                 </div>
@@ -82,13 +86,19 @@
                 <div class="linksgroup">
                     <h1 class="title">Links : </h1>
                     <div class="links">
-                        <a class="col" rel="me" alt="Discord" title="Discord" href="https://discord.gg/xkRPSg4"><img class="slink" src="Assets/discord.png"></a>
-                        <a class="col" rel="me" alt="Bluesky" title="Bluesky" href="https://bsky.app/profile/enzomtp.party"><img class="slink" src="Assets/bsky.webp"></a>
-                        <a class="col" rel="me" alt="Twitter" title="Twitter" href="https://twitter.com/Furred_enzomtp"><img class="slink" src="Assets/twitter.png"></a>
-                        <a class="col" rel="me" alt="Youtube" title="Youtube" href="https://youtube.com/@enzomtp"><img class="slink" src="Assets/ytb.png"></a>
-                        <a class="col" rel="me" alt="Stats.fm" title="Stats.fm" href="https://stats.fm/enzomtp"><img class="slink" src="Assets/stats.fm.png"></a>
-                        <a class="col" rel="me" alt="Pronoms" title="Pronoms" href="https://pronoms.fr/@enzomtp"><img class="slink" src="Assets/prons.png"></a>
-                        <a class="col" rel="me" alt="Throne Wishlist" title="Throne Wishlist" href="https://throne.com/enzomtp"><img class="slink" src="Assets/throne.png"></a>
+                        <a class="col" rel="me" title="Discord" aria-label="Discord" href="https://discord.gg/xkRPSg4"><i class="slink-icon fa-brands fa-discord"></i></a>
+                        <a class="col" rel="me" title="Bluesky" aria-label="Bluesky" href="https://bsky.app/profile/enzomtp.party"><i class="slink-icon fa-brands fa-bluesky"></i></a>
+                        <a class="col" rel="me" title="Twitter" aria-label="Twitter" href="https://twitter.com/Furred_enzomtp"><i class="slink-icon fa-brands fa-x-twitter"></i></a>
+                        <a class="col" rel="me" title="Youtube" aria-label="Youtube" href="https://youtube.com/@enzomtp"><i class="slink-icon fa-brands fa-youtube"></i></a>
+                        <a class="col" rel="me" title="Twitch" aria-label="Twitch" href="https://www.twitch.tv/enzomtp"><i class="slink-icon fa-brands fa-twitch"></i></a>
+                        <a class="col" rel="me" title="Steam" aria-label="Steam" href="https://steamcommunity.com/id/enzomtp/"><i class="slink-icon fa-brands fa-steam"></i></a>
+                        <a class="col" rel="me" title="GitHub" aria-label="GitHub" href="https://github.com/enzomtpYT"><i class="slink-icon fa-brands fa-github"></i></a>
+                        <a class="col" rel="me" title="VRChat" aria-label="VRChat" href="https://vrchat.com/home/user/usr_682fd024-c745-4003-afe8-a534d0133afd"><i class="slink-icon fa-solid fa-vr-cardboard"></i></a>
+                        <a class="col" rel="me" title="Ko-fi" aria-label="Ko-fi" href="https://ko-fi.com/enzomtp/"><i class="slink-icon fa-solid fa-mug-hot"></i></a>
+                        <a class="col" rel="me" title="Signal" aria-label="Signal" href="https://signal.me/#eu/yR7aIquli2GUfUXPgV9EaRqqn2FiSPMYRYk2V8YIm3UfRZm1xvpB8aFTg9xnazVR"><i class="slink-icon fa-brands fa-signal-messenger"></i></a>
+                        <a class="col" rel="me" title="Stats.fm" aria-label="Stats.fm" href="https://stats.fm/enzomtp"><i class="slink-icon fa-solid fa-chart-simple"></i></a>
+                        <a class="col" rel="me" title="Pronoms" aria-label="Pronoms" href="https://pronoms.fr/@enzomtp"><i class="slink-icon fa-solid fa-at"></i></a>
+                        <a class="col" rel="me" title="Throne Wishlist" aria-label="Throne Wishlist" href="https://throne.com/enzomtp"><i class="slink-icon fa-solid fa-gift"></i></a>
                     </div>
                 </div>
             </div>

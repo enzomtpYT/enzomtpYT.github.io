@@ -15,6 +15,7 @@ let tag = document.getElementById("tag");
 let tagimg = document.getElementById("tagimg");
 let tagdiv = document.getElementsByClassName("tagdiv")[0];
 let emote = document.getElementById("emote");
+let avatarDecoration = document.getElementById("avatarDecoration");
 let userid = "221273966457782283"
 let upprog = null
 isLanLoaded = false
@@ -106,6 +107,23 @@ function update(datas) {
     if ( pdpimg.src !== "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar) {
         pdpimg.src = "https://cdn.discordapp.com/avatars/"+userid+"/"+datas.d.discord_user.avatar;
     }
+
+    let avatarDecorationData = datas.d.discord_user.avatar_decoration_data;
+    if (avatarDecorationData && avatarDecorationData.asset) {
+        let ext = avatarDecorationData.asset.startsWith("a_") ? "gif" : "png";
+        let decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${avatarDecorationData.asset}.${ext}?size=240&passthrough=true`;
+        if (avatarDecoration.src !== decorationUrl) {
+            avatarDecoration.src = decorationUrl;
+            avatarDecoration.onerror = () => {
+                avatarDecoration.src = `https://cdn.discordapp.com/avatar-decoration-presets/${avatarDecorationData.asset}.png?size=240&passthrough=true`;
+            };
+        }
+        avatarDecoration.hidden = false;
+    } else {
+        avatarDecoration.hidden = true;
+        avatarDecoration.src = "";
+    }
+
     if (datas.d.discord_status == "dnd") {
         document.getElementById("status").style.backgroundColor = "#c63e40";
         document.getElementById("status").title = "Discord Status : Do Not Disturb";
