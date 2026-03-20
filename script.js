@@ -21,6 +21,46 @@ let upprog = null
 let hasStartedReveal = false
 isLanLoaded = false
 isPageLoaded = false
+let effectsEnabled = true;
+let autoDetectFPS = true;
+let lowFpsFrames = 0;
+let lastFrameTime = performance.now();
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.matchMedia("(pointer: coarse)").matches && window.matchMedia("(max-width: 768px)").matches);
+}
+
+function toggleEffects(manual = false) {
+    if (manual) autoDetectFPS = false;
+    effectsEnabled = !effectsEnabled;
+    document.body.classList.toggle('effects-disabled', !effectsEnabled);
+    
+    let btn = document.getElementById("toggleEffectsBtn");
+    if(btn) {
+        btn.innerHTML = effectsEnabled ? '<i class="fa-solid fa-wand-magic-sparkles"></i>' : '<i class="fa-solid fa-power-off"></i>';
+    }
+}
+
+function monitorPerformance(time) {
+    if (!effectsEnabled || !autoDetectFPS) {
+        lastFrameTime = time;
+    } else {
+        let delta = time - lastFrameTime;
+        lastFrameTime = time;
+        if (delta > 45) { // < 22 FPS threshold
+            lowFpsFrames++;
+        } else {
+            lowFpsFrames = Math.max(0, lowFpsFrames - 1);
+        }
+        if (lowFpsFrames > 60) {
+            console.log("High lag detected. Auto-disabling background effects for performance.");
+            toggleEffects();
+        }
+    }
+    requestAnimationFrame(monitorPerformance);
+}
+requestAnimationFrame(monitorPerformance);
 
 datasend = {
     op: 2,
@@ -92,6 +132,13 @@ function disableLoading() {
 window.addEventListener("load", function(){ 
     isPageLoaded = true;
     disableLoading();
+    
+    // Auto-disable effects on mobile devices
+    if (isMobileDevice()) {
+        toggleEffects();
+        console.log("Mobile device detected. Background effects disabled automatically.");
+    }
+    
     initDots();
     initRain();
 });
@@ -124,9 +171,15 @@ function initRain() {
     }
 
     function animate() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (!prefersReducedMotion) {
+            requestAnimationFrame(animate);
+        }
+
         ctx.clearRect(0, 0, width, height);
 
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!effectsEnabled) return;
 
         for (let i = 0; i < raindrops.length; i++) {
             let drop = raindrops[i];
@@ -146,10 +199,6 @@ function initRain() {
             ctx.strokeStyle = `rgba(200, 220, 255, ${drop.alpha + 0.15})`; // Slight blueish-white tint, moderate opacity
             ctx.lineWidth = 1.2;
             ctx.stroke();
-        }
-
-        if (!prefersReducedMotion) {
-            requestAnimationFrame(animate);
         }
     }
 
@@ -210,10 +259,15 @@ function initDots() {
     }
 
     function animate() {
-        ctx.clearRect(0, 0, width, height);
-        
-        // Stop animating position if user prefers reduced motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (!prefersReducedMotion) {
+            requestAnimationFrame(animate);
+        }
+
+        ctx.clearRect(0, 0, width, height);
+
+        if (!effectsEnabled) return;
 
         for (let i = 0; i < dots.length; i++) {
             let dot = dots[i];
@@ -276,10 +330,6 @@ function initDots() {
                     ctx.stroke();
                 }
             }
-        }
-        
-        if (!prefersReducedMotion) {
-            requestAnimationFrame(animate);
         }
     }
 
