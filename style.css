@@ -61,7 +61,47 @@ a:hover {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    display: none;
+    display: block;
+}
+
+#dotsCanvas, #rainCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#dotsCanvas {
+    opacity: 0.6;
+}
+
+#rainCanvas {
+    opacity: 0.45;
+}
+
+.bg::before {
+    background:
+        radial-gradient(circle at 14% 22%, rgba(97, 163, 255, 0.28), transparent 42%),
+        radial-gradient(circle at 82% 76%, rgba(255, 118, 168, 0.24), transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(156, 121, 255, 0.16), transparent 55%);
+    filter: blur(26px) saturate(1.15);
+    mix-blend-mode: screen;
+    opacity: 0.62;
+    transform: translate3d(0, 0, 0) scale(1.04);
+    animation: auraFloat 24s ease-in-out infinite alternate, auraPulse 7.5s ease-in-out infinite;
+}
+
+.bg::after {
+    background:
+        radial-gradient(circle at 74% 16%, rgba(255, 233, 144, 0.16), transparent 36%),
+        radial-gradient(circle at 28% 84%, rgba(129, 247, 229, 0.14), transparent 38%);
+    filter: blur(34px) saturate(1.2);
+    mix-blend-mode: lighten;
+    opacity: 0.46;
+    transform: translate3d(0, 0, 0) scale(1.06);
+    animation: auraFloat 30s ease-in-out infinite alternate-reverse, auraPulse 9s ease-in-out infinite;
 }
 
 .container {
@@ -75,6 +115,12 @@ a:hover {
     align-items: center;
     padding: 1.25rem 0;
     margin-inline: auto;
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+}
+
+body.site-ready .container {
+    animation: pageReveal 700ms cubic-bezier(0.16, 0.7, 0.22, 1) forwards;
 }
 
 .card {
@@ -90,7 +136,6 @@ a:hover {
     box-shadow: var(--shadow);
     margin: 0.28rem 0;
     overflow: hidden;
-    animation: cardIn 560ms cubic-bezier(0.17, 0.67, 0.21, 1) both;
 }
 
 .card::before {
@@ -112,6 +157,10 @@ a:hover {
 
 .card:nth-child(4) {
     animation-delay: 180ms;
+}
+
+body.site-ready .card {
+    animation: cardIn 560ms cubic-bezier(0.17, 0.67, 0.21, 1) both;
 }
 
 .card:hover {
@@ -458,6 +507,18 @@ a:hover {
     }
 }
 
+@keyframes pageReveal {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 @keyframes bgDrift {
     from {
         transform: scale(1.08) translate3d(-0.4%, -0.3%, 0);
@@ -702,6 +763,7 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .container,
     .bg,
     .bg::before,
     .bg::after,

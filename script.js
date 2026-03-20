@@ -18,6 +18,7 @@ let emote = document.getElementById("emote");
 let avatarDecoration = document.getElementById("avatarDecoration");
 let userid = "221273966457782283"
 let upprog = null
+let hasStartedReveal = false
 isLanLoaded = false
 isPageLoaded = false
 
@@ -77,11 +78,13 @@ function getAverageBorderColor(imageUrl, borderWidth) {
   }
 
 function disableLoading() {
-    if (isPageLoaded && isLanLoaded) {
+    if (isPageLoaded && isLanLoaded && !hasStartedReveal) {
+        hasStartedReveal = true;
         loadinganim.style.opacity = "0";
         // wait 1s
         setTimeout(() => {
         loadinganim.style.display = "none";
+        document.body.classList.add("site-ready");
         }, 1050);
     }
 }
@@ -89,7 +92,209 @@ function disableLoading() {
 window.addEventListener("load", function(){ 
     isPageLoaded = true;
     disableLoading();
+    initDots();
+    initRain();
 });
+
+// Really Light Rain Animation
+function initRain() {
+    const canvas = document.getElementById("rainCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    let raindrops = [];
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    function createRaindrops() {
+        raindrops = [];
+        const numDrops = Math.floor((window.innerWidth * window.innerHeight) / 10000); // Light rain
+        for (let i = 0; i < numDrops; i++) {
+            raindrops.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                length: Math.random() * 10 + 10,
+                vy: Math.random() * 4 + 4, // Falls down
+                alpha: Math.random() * 0.2 + 0.1 // Very light
+            });
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        for (let i = 0; i < raindrops.length; i++) {
+            let drop = raindrops[i];
+
+            if (!prefersReducedMotion) {
+                drop.y += drop.vy;
+
+                if (drop.y > height) {
+                    drop.y = -drop.length;
+                    drop.x = Math.random() * width;
+                }
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(drop.x, drop.y);
+            ctx.lineTo(drop.x, drop.y + drop.length);
+            ctx.strokeStyle = `rgba(200, 220, 255, ${drop.alpha + 0.15})`; // Slight blueish-white tint, moderate opacity
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+        }
+
+        if (!prefersReducedMotion) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    window.addEventListener("resize", () => {
+        resize();
+        createRaindrops();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            animate();
+        }
+    });
+
+    resize();
+    createRaindrops();
+    animate();
+}
+
+// Moving Dots Animation
+function initDots() {
+    const canvas = document.getElementById("dotsCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    let dots = [];
+    let mouse = {
+        x: null,
+        y: null,
+        radius: 135
+    };
+
+    window.addEventListener("mousemove", (e) => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+    });
+
+    window.addEventListener("mouseout", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    
+    function createDots() {
+        dots = [];
+        const numDots = Math.floor((window.innerWidth * window.innerHeight) / 6000);
+        for (let i = 0; i < numDots; i++) {
+            dots.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random() * 0.5 + 0.1
+            });
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Stop animating position if user prefers reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        for (let i = 0; i < dots.length; i++) {
+            let dot = dots[i];
+            
+            if (!prefersReducedMotion) {
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+
+                // Mouse interaction
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - dot.x;
+                    let dy = mouse.y - dot.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        let forceDirX = dx / distance;
+                        let forceDirY = dy / distance;
+                        let maxDistance = mouse.radius;
+                        let force = (maxDistance - distance) / maxDistance;
+                        let pushStr = 2.5;
+
+                        dot.x -= forceDirX * force * pushStr;
+                        dot.y -= forceDirY * force * pushStr;
+
+                        // Connect dot to mouse
+                        ctx.beginPath();
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        let lineAlpha = (1 - distance / mouse.radius) * 0.3;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${lineAlpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+
+                if (dot.x < 0) dot.x = width;
+                if (dot.x > width) dot.x = 0;
+                if (dot.y < 0) dot.y = height;
+                if (dot.y > height) dot.y = 0;
+            }
+
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${dot.alpha})`;
+            ctx.fill();
+
+            for (let j = i + 1; j < dots.length; j++) {
+                let dot2 = dots[j];
+                let dx = dot.x - dot2.x;
+                let dy = dot.y - dot2.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(dot.x, dot.y);
+                    ctx.lineTo(dot2.x, dot2.y);
+                    let lineAlpha = (1 - distance / 100) * 0.3;
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${lineAlpha})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        if (!prefersReducedMotion) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    window.addEventListener("resize", () => {
+        resize();
+        createDots();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            animate(); // Call once to draw static dots
+        }
+    });
+
+    resize();
+    createDots();
+    animate();
+}
 
 function update(datas) {
     let username = datas.d.discord_user.display_name;
@@ -139,7 +344,8 @@ function update(datas) {
     }
 
     if (datas.d.activities.length == 0) {
-        cstatus.innerHTML = ""
+        cstatus.innerHTML = "";
+        emote.style.display = "none";
     } else {
         if (datas.d.spotify) {
             if (datas.d.activities["0"].state == datas.d.spotify.artist) {
